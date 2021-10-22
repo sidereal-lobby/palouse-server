@@ -63,11 +63,15 @@ const blastClients = (msg) => {
   msg = msg.toString();
 
   console.log(`Sending message to clients: "${msg}"`);
+  // I'm not sure this is an actual array?  let's test it!
+  const wssClientsIsArray = Array.isArray(wss.clients);
+
   wss.clients.forEach((client) => { 
+    i++;
     client.send(msg);
   });
 
-  console.log(`Sent to ${i} clients.`);
+  console.log(`Sent to ${i} clients. wssClientsIsArray=${wssClientsIsArray}`);
 }
 
 wss.on("connection", function connection(ws, request, client) {
